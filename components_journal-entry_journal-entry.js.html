@@ -38,7 +38,7 @@ class JournalEntry extends HTMLElement {
             &lt;div class="entry-container">
                 &lt;div class="entry-header">
                     &lt;button class="entry-back-btn">&lt;&lt;/button>
-                    &lt;h2 class="entry-title">My Eventful Sunday&lt;/h2>
+                    &lt;h2 class="entry-title" contenteditable>My Eventful Sunday&lt;/h2>
                     &lt;button class="entry-forward-btn">>&lt;/button>
                 &lt;/div>
                 &lt;div class="entry-tags-container">
@@ -49,10 +49,35 @@ class JournalEntry extends HTMLElement {
                 &lt;div class="entry-body">
                   &lt;div class="entry-body-header">
                     &lt;span class="entry-date">Sunday, May 2&lt;/span>
-                    &lt;button class="entry-edit-btn">Edit&lt;/button>
                   &lt;/div>
-                  &lt;div class="entry-content">
-                  &lt;/div>
+                  &lt;article contenteditable>
+                    &lt;ul class="bujo">
+                      &lt;li class="todo">&lt;span>To do&lt;/span>&lt;/li>
+                      &lt;li class="done">&lt;span>Done&lt;/span>&lt;/li>
+                      &lt;li class="event important">&lt;span>Event (important)&lt;/span>&lt;/li>
+                      &lt;li class="migrated">&lt;span>Migrated&lt;/span>&lt;/li>
+                      &lt;li class="scheduled">&lt;span>Scheduled&lt;/span>&lt;/li>
+                      &lt;li class="appointment deadline">&lt;span>Appointment (deadline)&lt;/span>&lt;/li>
+                      &lt;li class="in-progress">&lt;span>In Progress&lt;/span>&lt;/li>
+                      &lt;li class="cancelled">&lt;span>Cancelled&lt;/span>&lt;/li>
+                      &lt;li class="research">&lt;span>Research&lt;/span>&lt;/li>
+                      &lt;li class="note">&lt;span>Note&lt;/span>&lt;/li>
+                    &lt;/ul>
+                  &lt;/article>
+
+                &lt;select class="menu">
+                  &lt;option value="todo" id="todo" class="menu-item">To Do&lt;/option>
+                  &lt;option value="done" id="done" class="menu-item">Done&lt;/option>
+                  &lt;option value="event" id="event" class="menu-item">Event&lt;/option>
+                  &lt;option value="migrated" id="migrated" class="menu-item"">Migrated&lt;/option>
+                  &lt;option value="scheduled" id="scheduled" class="menu-item"">Scheduled&lt;/option>
+                  &lt;option value="appointment deadline" id="appointment deadline" class="menu-item"">Appointment Deadline&lt;/option>
+                  &lt;option value="in-progress" id="in-progress" class="menu-item"">In-Progress&lt;/option>
+                  &lt;option value="cancelled" id="cancelled" class="menu-item"">Cancelled&lt;/option>
+                  &lt;option value="research" id="research" class="menu-item"">Research&lt;/option>
+                  &lt;option value="note" id="note" class="menu-item"">Note&lt;/option>
+                &lt;/select>
+                &lt;div class="out-click">&lt;/div>
                 &lt;/div>
             &lt;/div>
            `;
@@ -60,92 +85,100 @@ class JournalEntry extends HTMLElement {
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-    /**
-     * This a query selector that hides the current journal-entry element while toggling the
-     * visibility of the entry-editor element. This makes the transition from journal-entry to
-     * entry-editor look more seamless.
-     */
-    this.shadowRoot.querySelector('.entry-edit-btn').addEventListener('click', () => {
-      const entryEditor = document.querySelector('entry-editor');
-      const itemCreators = entryEditor.shadowRoot.querySelectorAll('entry-item-creator');
+    const menu = this.shadowRoot.querySelector('.menu');
+    const outClick = this.shadowRoot.querySelector('.out-click');
 
-      /**
-       * Toggling the visibility of entry-editor and the journal-entry
-       */
-      entryEditor.style.visibility = 'visible';
-      this.style.visibility = 'hidden';
+    outClick.addEventListener('click', () => {
+      menu.classList.remove('show');
+      outClick.style.display = 'none';
+    });
 
-      /**
-       * Toggles all of the the delete buttons for the entry-item-creators that contain text to be visible
-       * This is done so that the last entry-item-creator that generates the other entry-item-creators
-       * doesn't have the delete button showing.
-       */
-      itemCreators.forEach((element) => {
-        if (element.shadowRoot.querySelector('.bullet-text').innerHTML !== '') {
-          element.shadowRoot.querySelector('.entry-del-btn').style.visibility = 'visible';
+    this.shadowRoot.querySelectorAll('.menu > li').forEach(item => {
+      item.addEventListener('click', () => {
+        const bullets = this.shadowRoot.querySelectorAll('article > ul > li');
+        window.alert(item.getAttribute('id'));
+        bullets.forEach(test);
+        function test (element) {
+          element.className = item.getAttribute('id');
         }
       });
     });
-  }
 
-  /**
-   * Receives the new content from the entry-editor and calls the methods updateTitle and addItems to
-   * update the innerHTML of the div.entry-header and to display the items in div.entry-content
-   * @param {JSON} content - { title: 'title of entry', date: 'entry's date', items: [array of JSON objs] }
-   */
-  updateContent (content) {
-    this.updateTitle(content.title);
-    this.addItems(content.items);
-  }
+    // const menuList = this.shadowRoot.querySelector('.menu > li');
+    const optionList = this.shadowRoot.querySelector('.menu');
+    const hasListener = [];
+    function detectChanges () {
+      // Detecting innerHtml change
+      const input = document.querySelector('journal-entry').shadowRoot.querySelector('article');
 
-  /**
-   * Takes an array of entries and adds all of them to the entry-content div
-   * @param {JSON_Array} itemList - Array with all of the entries content stored as a JSON
-   * JSON's format: { symbol: 'path to img', text: 'Bullet's text' }
-   */
-  addItems (itemList) {
-    if (this.removeItems(this.shadowRoot.querySelector('.entry-content').children > 0)) {
-      this.removeItems();
+      const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+
+      bulletFunctionality();
+      const observer = new MutationObserver(bulletFunctionality);
+
+      observer.observe(input, {
+        childList: true,
+        subtree: true
+      });
+      function bulletFunctionality () {
+        // Create event listener for each new bullet created
+        const bullets = document.querySelector('journal-entry').shadowRoot.querySelectorAll('article > ul > li');
+        if (bullets.length === 0) {
+          const newUL = document.createElement('ul');
+          const newLI = document.createElement('li');
+          newUL.classList.add('bujo');
+          newLI.classList.add('migrated');
+
+          newUL.appendChild(newLI);
+          input.appendChild(newUL);
+        }
+
+        bullets.forEach((element) => {
+          if (hasListener.indexOf(element) === -1) {
+            hasListener.push(element);
+            // Allow option list when right click
+            element.addEventListener('contextmenu', e => {
+              hasListener.push(element);
+              e.preventDefault();
+              console.log('right click');
+              menu.style.top = `${e.clientY}px`;
+              menu.style.left = `${e.clientX}px`;
+              menu.classList.add('show');
+              outClick.style.display = 'block';
+
+              element.classList.add('selected');
+              console.log(element);
+            });
+          }
+        });
+
+        /**
+             * One bug is that if you open the menu and select and option
+             * You selecting another option will not update that bullet
+             */
+        optionList.addEventListener('change', (event) => {
+          const bullets = document.querySelector('journal-entry').shadowRoot.querySelectorAll('article > ul > li');
+          bullets.forEach(element => {
+            if (element.classList.contains('selected')) {
+              console.log(element);
+              element.className = event.target.value;
+              element.classList.remove('selected');
+            }
+          });
+
+          bullets.forEach(element => {
+            if (element.classList.contains('selected')) {
+              element.classList.remove('selected');
+            }
+          // menu.classList.remove('show');
+          });
+        });
+      }
     }
 
-    for (let i = 0; i &lt; itemList.length; i++) {
-      this.addItem(itemList[i]);
-    }
-  }
-
-  /**
-   * Creates a new bullet-item component and sets the img src and innerHTML
-   * of the span to be that of the parameters.
-   * @param {JSON} content - { symbol: 'path to img', text: 'Bullet's text' }
-   */
-  addItem (content) {
-    const newItem = document.createElement('bullet-item');
-
-    newItem.img = content.symbol;
-    newItem.text = content.text;
-
-    this.shadowRoot.querySelector('.entry-content').appendChild(newItem);
-  }
-
-  /**
-   * Removes all of the items in div.entry-content. This is done so that when
-   * updating the journal-entry element the previous items are not still present
-   * after updating. Essentially deletes everything in the entry-content div.
-   */
-  removeItems () {
-    const entryContent = this.shadowRoot.querySelector('.entry-content');
-
-    while (entryContent.firstChild) {
-      entryContent.removeChild(entryContent.firstChild);
-    }
-  }
-
-  /**
-   * Sets the entry-title div's innerHTML to equal the value of newTitle
-   * @param {string} newTitle - Title of the entry
-   */
-  updateTitle (newTitle) {
-    this.shadowRoot.querySelector('.entry-title').innerHTML = newTitle;
+    window.setTimeout(() => {
+      detectChanges();
+    }, 500);
   }
 }
 
@@ -160,13 +193,13 @@ customElements.define('journal-entry', JournalEntry);
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clock.html">Clock</a></li><li><a href="DropDownMenu.html">DropDownMenu</a></li><li><a href="EntryEditor.html">EntryEditor</a></li><li><a href="goalsBoard.html">goalsBoard</a></li><li><a href="JournalEntry.html">JournalEntry</a></li><li><a href="MenuSymbols.html">MenuSymbols</a></li><li><a href="MoodIndicator.html">MoodIndicator</a></li><li><a href="navBar.html">navBar</a></li></ul><h3>Global</h3><ul><li><a href="global.html#poooow">poooow</a></li><li><a href="global.html#sillyLogger">sillyLogger</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clock.html">Clock</a></li><li><a href="DropDownMenu.html">DropDownMenu</a></li><li><a href="goalsBoard.html">goalsBoard</a></li><li><a href="JournalEntry.html">JournalEntry</a></li><li><a href="MenuSymbols.html">MenuSymbols</a></li><li><a href="MoodIndicator.html">MoodIndicator</a></li><li><a href="navBar.html">navBar</a></li></ul><h3>Global</h3><ul><li><a href="global.html#poooow">poooow</a></li><li><a href="global.html#sillyLogger">sillyLogger</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Jun 01 2021 08:58:13 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Jun 01 2021 18:44:27 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
