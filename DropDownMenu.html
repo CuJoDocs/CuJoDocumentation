@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Global</title>
+    <title>JSDoc: Class: DropDownMenu</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">Class: DropDownMenu</h1>
 
     
 
@@ -28,7 +28,9 @@
 
 <header>
     
-        <h2></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>DropDownMenu<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">DropDownMenu Web Component</div>
         
     
 </header>
@@ -38,7 +40,28 @@
     
         
 
-        
+    
+    <h2>Constructor</h2>
+    
+
+    
+    <h4 class="name" id="DropDownMenu"><span class="type-signature"></span>new DropDownMenu<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <dl class="details">
@@ -68,6 +91,11 @@
     
 
     
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_entry-editor_dropdown-menu_dropdown-menu.js.html">components/entry-editor/dropdown-menu/dropdown-menu.js</a>, <a href="components_entry-editor_dropdown-menu_dropdown-menu.js.html#line2">line 2</a>
+    </li></ul></dd>
+    
 
     
 
@@ -77,7 +105,24 @@
 </dl>
 
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     </div>
 
@@ -104,7 +149,7 @@
     
 
     
-    <h4 class="name" id="poooow"><span class="type-signature"></span>poooow<span class="signature">(value, exponent)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    <h4 class="name" id="addSelection"><span class="type-signature"></span>addSelection<span class="signature">(content)</span><span class="type-signature"></span></h4>
     
 
     
@@ -112,7 +157,15 @@
 
 
 <div class="description">
-    Raises a number to exponent
+    Helper function that generates a single option in the dropdown menu.
+The HTML structure is as follows:
+<div class="item-container">
+ <img src="img filepath" class="bullet-img">
+ <span class="bullet-name">(content.name)<span>
+</div>
+This is then appended to the bullet-selection-input div.
+The item-container also has an event listener to update the symbol-display div
+found in the entry-item-creator to that of the selection.
 </div>
 
 
@@ -148,13 +201,13 @@
 
         <tr>
             
-                <td class="name"><code>value</code></td>
+                <td class="name"><code>content</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">JSON</span>
 
 
             
@@ -164,30 +217,7 @@
 
             
 
-            <td class="description last">The base to raise</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>exponent</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The exponent</td>
+            <td class="description last">{ imgSrc: 'filepath', name: 'what the symbol represents' }</td>
         </tr>
 
     
@@ -228,7 +258,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js-doc-test.js.html">js-doc-test.js</a>, <a href="js-doc-test.js.html#line20">line 20</a>
+        <a href="components_entry-editor_dropdown-menu_dropdown-menu.js.html">components/entry-editor/dropdown-menu/dropdown-menu.js</a>, <a href="components_entry-editor_dropdown-menu_dropdown-menu.js.html#line49">line 49</a>
     </li></ul></dd>
     
 
@@ -253,28 +283,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - The exponent power
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">number</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -286,7 +294,7 @@
     
 
     
-    <h4 class="name" id="sillyLogger"><span class="type-signature"></span>sillyLogger<span class="signature">(message)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="initSymbols"><span class="type-signature"></span>initSymbols<span class="signature">(symbols)</span><span class="type-signature"></span></h4>
     
 
     
@@ -294,7 +302,8 @@
 
 
 <div class="description">
-    A silly logger function
+    Takes in a list of JSON objects with the format { imgSrc: 'filepath', name: 'what the symbol represents' }
+and adds them to the bullet-selection-input div.
 </div>
 
 
@@ -330,13 +339,13 @@
 
         <tr>
             
-                <td class="name"><code>message</code></td>
+                <td class="name"><code>symbols</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">JSON_Array</span>
 
 
             
@@ -346,7 +355,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">array of all the symbols (bullets) to be added to the dropdown</td>
         </tr>
 
     
@@ -387,7 +396,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js-doc-test.js.html">js-doc-test.js</a>, <a href="js-doc-test.js.html#line8">line 8</a>
+        <a href="components_entry-editor_dropdown-menu_dropdown-menu.js.html">components/entry-editor/dropdown-menu/dropdown-menu.js</a>, <a href="components_entry-editor_dropdown-menu_dropdown-menu.js.html#line86">line 86</a>
     </li></ul></dd>
     
 
@@ -412,28 +421,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    Nothing
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
