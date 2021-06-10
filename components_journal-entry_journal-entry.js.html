@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/journal-entry/journal-entry.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/journal-entry/journal-entry.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** JournalEntry Web Component */
+class JournalEntry extends HTMLElement {
+  constructor () {
+    super();
+
+    const template = document.createElement('template');
+    template.innerHTML = `
+            &lt;link rel="stylesheet" href="./components/journal-entry/journal-entry.css">
+  
+            &lt;div class="entry-container">
+                &lt;div class="entry-header">
+                    &lt;button class="entry-back-btn">&lt;&lt;/button>
+                    &lt;h2 class="entry-title" contenteditable>My Eventful Sunday&lt;/h2>
+                    &lt;button class="entry-forward-btn">>&lt;/button>
+                &lt;/div>
+                &lt;div class="entry-tags-container">
+                    &lt;div class="tags">Imma tag&lt;/div>
+                    &lt;div class="search-icon">Search&lt;/div>
+                &lt;/div>
+                
+                &lt;div class="entry-body">
+                  &lt;div class="entry-body-header">
+                    &lt;span class="entry-date">Sunday, May 2&lt;/span>
+                  &lt;/div>
+                  &lt;article contenteditable>
+                    &lt;ul class="bujo">
+                      &lt;li class="todo">&lt;span>To do&lt;/span>&lt;/li>
+                      &lt;li class="done">&lt;span>Done&lt;/span>&lt;/li>
+                      &lt;li class="event important">&lt;span>Event (important)&lt;/span>&lt;/li>
+                      &lt;li class="migrated">&lt;span>Migrated&lt;/span>&lt;/li>
+                      &lt;li class="scheduled">&lt;span>Scheduled&lt;/span>&lt;/li>
+                      &lt;li class="appointment deadline">&lt;span>Appointment (deadline)&lt;/span>&lt;/li>
+                      &lt;li class="in-progress">&lt;span>In Progress&lt;/span>&lt;/li>
+                      &lt;li class="cancelled">&lt;span>Cancelled&lt;/span>&lt;/li>
+                      &lt;li class="research">&lt;span>Research&lt;/span>&lt;/li>
+                      &lt;li class="note">&lt;span>Note&lt;/span>&lt;/li>
+                    &lt;/ul>
+                  &lt;/article>
+
+                &lt;select class="menu">
+                  &lt;option value="todo" id="todo" class="menu-item">To Do&lt;/option>
+                  &lt;option value="done" id="done" class="menu-item">Done&lt;/option>
+                  &lt;option value="event" id="event" class="menu-item">Event&lt;/option>
+                  &lt;option value="migrated" id="migrated" class="menu-item"">Migrated&lt;/option>
+                  &lt;option value="scheduled" id="scheduled" class="menu-item"">Scheduled&lt;/option>
+                  &lt;option value="appointment deadline" id="appointment deadline" class="menu-item"">Appointment Deadline&lt;/option>
+                  &lt;option value="in-progress" id="in-progress" class="menu-item"">In-Progress&lt;/option>
+                  &lt;option value="cancelled" id="cancelled" class="menu-item"">Cancelled&lt;/option>
+                  &lt;option value="research" id="research" class="menu-item"">Research&lt;/option>
+                  &lt;option value="note" id="note" class="menu-item"">Note&lt;/option>
+                &lt;/select>
+                &lt;div class="out-click">&lt;/div>
+                &lt;/div>
+            &lt;/div>
+           `;
+
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+    const menu = this.shadowRoot.querySelector('.menu');
+    const outClick = this.shadowRoot.querySelector('.out-click');
+
+    outClick.addEventListener('click', () => {
+      menu.classList.remove('show');
+      outClick.style.display = 'none';
+    });
+
+    this.shadowRoot.querySelectorAll('.menu > li').forEach((item) => {
+      item.addEventListener('click', () => {
+        const bullets = this.shadowRoot.querySelectorAll('article > ul > li');
+        window.alert(item.getAttribute('id'));
+        bullets.forEach(test);
+        function test (element) {
+          element.className = item.getAttribute('id');
+        }
+      });
+    });
+
+    // const menuList = this.shadowRoot.querySelector('.menu > li');
+    const optionList = this.shadowRoot.querySelector('.menu');
+    const hasListener = [];
+    function detectChanges () {
+      // Detecting innerHtml change
+      const input = document.querySelector('journal-entry').shadowRoot.querySelector('article');
+
+      const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+
+      bulletFunctionality();
+      const observer = new MutationObserver(bulletFunctionality);
+
+      observer.observe(input, {
+        childList: true,
+        subtree: true
+      });
+      function bulletFunctionality () {
+        // Create event listener for each new bullet created
+        const bullets = document.querySelector('journal-entry').shadowRoot.querySelectorAll('article > ul > li');
+        if (bullets.length === 0) {
+          const newUL = document.createElement('ul');
+          const newLI = document.createElement('li');
+          newUL.classList.add('bujo');
+          newLI.classList.add('migrated');
+
+          newUL.appendChild(newLI);
+          input.appendChild(newUL);
+        }
+
+        bullets.forEach((element) => {
+          if (hasListener.indexOf(element) === -1) {
+            hasListener.push(element);
+            // Allow option list when right click
+            element.addEventListener('contextmenu', (e) => {
+              hasListener.push(element);
+              e.preventDefault();
+              console.log('right click');
+              menu.style.top = `${e.clientY}px`;
+              menu.style.left = `${e.clientX}px`;
+              menu.classList.add('show');
+              outClick.style.display = 'block';
+
+              element.classList.add('selected');
+              console.log(element);
+            });
+          }
+        });
+
+        /**
+             * One bug is that if you open the menu and select and option
+             * You selecting another option will not update that bullet
+             */
+        optionList.addEventListener('change', (event) => {
+          const bullets = document.querySelector('journal-entry').shadowRoot.querySelectorAll('article > ul > li');
+          bullets.forEach((element) => {
+            if (element.classList.contains('selected')) {
+              console.log(element);
+              element.className = event.target.value;
+              element.classList.remove('selected');
+            }
+          });
+
+          bullets.forEach(element => {
+            if (element.classList.contains('selected')) {
+              element.classList.remove('selected');
+            }
+          // menu.classList.remove('show');
+          });
+        });
+      }
+    }
+
+    window.setTimeout(() => {
+      detectChanges();
+    }, 500);
+  }
+}
+
+customElements.define('journal-entry', JournalEntry);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clock.html">Clock</a></li><li><a href="DropDownMenu.html">DropDownMenu</a></li><li><a href="goalsBoard.html">goalsBoard</a></li><li><a href="JournalEntry.html">JournalEntry</a></li><li><a href="MenuSymbols.html">MenuSymbols</a></li><li><a href="MoodIndicator.html">MoodIndicator</a></li><li><a href="navBar.html">navBar</a></li><li><a href="QuoteGenerator.html">QuoteGenerator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getWeek">getWeek</a></li><li><a href="global.html#poooow">poooow</a></li><li><a href="global.html#saveStorage">saveStorage</a></li><li><a href="global.html#sillyLogger">sillyLogger</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu Jun 10 2021 04:45:35 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

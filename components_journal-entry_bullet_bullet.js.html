@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: js-doc-test.js</title>
+    <title>JSDoc: Source: components/journal-entry/bullet/bullet.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: js-doc-test.js</h1>
+    <h1 class="page-title">Source: components/journal-entry/bullet/bullet.js</h1>
 
     
 
@@ -26,30 +26,55 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// Simple file with random functions to test JSDoc generation within the pipeline.
+            <pre class="prettyprint source linenums"><code>/* global HTMLElement, customElements */
 
-/**
- * A silly logger function
- * @param {string} message
- * @return {void} Nothing
- */
-function sillyLogger (message) {
-  console.log(`Don't use in production ${message}`);
+class Bullet extends HTMLElement {
+  constructor () {
+    super();
+
+    const template = document.createElement('template');
+    template.innerHTML = `
+            &lt;link rel="stylesheet" href="./components/journal-entry/bullet/bullet.css">
+  
+            &lt;div class="bullet-container">
+              &lt;img src="" class="bullet-img" width="20px" height="20px">&lt;span class="bullet-text">&lt;/span>
+            &lt;/div>
+           `;
+
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+
+  /**
+   * Getter for the .bullet-image src
+   */
+  get img () {
+    return this.shadowRoot.querySelector('.bullet-img').src;
+  }
+
+  /**
+   * Setter for the .bullet-image src
+   */
+  set img (newImg) {
+    this.shadowRoot.querySelector('.bullet-img').src = newImg;
+  }
+
+  /**
+   * Getter for the .bullet-text innerHTML
+   */
+  get text () {
+    return this.shadowRoot.querySelector('.bullet-text').innerHTML;
+  }
+
+  /**
+   * Stter for the .bullet-text innerHTML
+   */
+  set text (newText) {
+    this.shadowRoot.querySelector('.bullet-text').innerHTML = newText;
+  }
 }
 
-sillyLogger('test test');
-
-/**
- * Raises a number to exponent
- * @param {number} value - The base to raise
- * @param {number} exponent - The exponent
- * @return {number} - The exponent power
- */
-function poooow (value, exponent) {
-  return value ** exponent;
-}
-
-poooow(3, 2);
+customElements.define('bullet-item', Bullet);
 </code></pre>
         </article>
     </section>
