@@ -139,7 +139,616 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
 
+        
+            
+<h4 class="name" id="processChange"><span class="type-signature"></span>processChange<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Function that calls the debounce method to begin saving the entry to storage
+Code adapted from https://www.freecodecamp.org/news/javascript-debounce-example/
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_journal-entry_journal-entry.js.html">components/journal-entry/journal-entry.js</a>, <a href="components_journal-entry_journal-entry.js.html#line167">line 167</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="connectedCallback"><span class="type-signature"></span>connectedCallback<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Gets called after the DOMContent gets loaded. For more information:
+https://stackoverflow.com/questions/54857905/deferred-setattribute-call-in-custom-element-constructor-causes-dom-error-is-it
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_journal-entry_journal-entry.js.html">components/journal-entry/journal-entry.js</a>, <a href="components_journal-entry_journal-entry.js.html#line159">line 159</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="debounce"><span class="type-signature"></span>debounce<span class="signature">(func, timeout)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Method delays the call of the func by timeout amount of ms
+Code from https://www.freecodecamp.org/news/javascript-debounce-example/
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>func</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">callback function that should be run after timeout</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>timeout</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    500
+                
+                </td>
+            
+
+            <td class="description last">number of ms to wait before running func</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_journal-entry_journal-entry.js.html">components/journal-entry/journal-entry.js</a>, <a href="components_journal-entry_journal-entry.js.html#line266">line 266</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    a function that starts a timre to call func.
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="loadEntry"><span class="type-signature"></span>loadEntry<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Loads the data from storage to the journal-entry. It loads the title, date, and
+content of the page. The content being any text or bullets.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_journal-entry_journal-entry.js.html">components/journal-entry/journal-entry.js</a>, <a href="components_journal-entry_journal-entry.js.html#line245">line 245</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="saveEntry"><span class="type-signature"></span>saveEntry<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Saves the current title, date, and content in the article element to localStorage.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_journal-entry_journal-entry.js.html">components/journal-entry/journal-entry.js</a>, <a href="components_journal-entry_journal-entry.js.html#line223">line 223</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="validateEntry"><span class="type-signature"></span>validateEntry<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Checks to see if there is an object in the storage variable for this particular date
+If not it creates it.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_journal-entry_journal-entry.js.html">components/journal-entry/journal-entry.js</a>, <a href="components_journal-entry_journal-entry.js.html#line213">line 213</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
 
     
@@ -155,13 +764,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Clock.html">Clock</a></li><li><a href="DropDownMenu.html">DropDownMenu</a></li><li><a href="goalsBoard.html">goalsBoard</a></li><li><a href="JournalEntry.html">JournalEntry</a></li><li><a href="MenuSymbols.html">MenuSymbols</a></li><li><a href="MoodIndicator.html">MoodIndicator</a></li><li><a href="navBar.html">navBar</a></li><li><a href="QuoteGenerator.html">QuoteGenerator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getWeek">getWeek</a></li><li><a href="global.html#poooow">poooow</a></li><li><a href="global.html#saveStorage">saveStorage</a></li><li><a href="global.html#sillyLogger">sillyLogger</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Calendar.html">Calendar</a></li><li><a href="Clock.html">Clock</a></li><li><a href="goalsBoard.html">goalsBoard</a></li><li><a href="JournalEntry.html">JournalEntry</a></li><li><a href="MenuSymbols.html">MenuSymbols</a></li><li><a href="MoodIndicator.html">MoodIndicator</a></li><li><a href="navBar.html">navBar</a></li><li><a href="QuoteGenerator.html">QuoteGenerator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createEntry">createEntry</a></li><li><a href="global.html#decodeDateInfo">decodeDateInfo</a></li><li><a href="global.html#decodeDateInfoElement">decodeDateInfoElement</a></li><li><a href="global.html#entryExists">entryExists</a></li><li><a href="global.html#getWeek">getWeek</a></li><li><a href="global.html#poooow">poooow</a></li><li><a href="global.html#saveStorage">saveStorage</a></li><li><a href="global.html#setCurrentDate">setCurrentDate</a></li><li><a href="global.html#sillyLogger">sillyLogger</a></li><li><a href="global.html#updateViewedDate">updateViewedDate</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu Jun 10 2021 05:40:15 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu Jun 10 2021 22:19:16 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/menu-symbols/menu-symbols.js</title>
+    <title>JSDoc: Source: components/calendar/calendar.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/menu-symbols/menu-symbols.js</h1>
+    <h1 class="page-title">Source: components/calendar/calendar.js</h1>
 
     
 
@@ -26,73 +26,92 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/** MenuSymbols Web Component */
-class MenuSymbols extends HTMLElement {
+            <pre class="prettyprint source linenums"><code>/** Calendar Web Component */
+class Calendar extends HTMLElement {
   constructor () {
     super();
 
     const template = document.createElement('template');
-    template.innerHTML = `
-    &lt;link rel="stylesheet" href="./components/menu-symbols/menu-symbols.css">
 
-    &lt;div class="q-mark">
-      &lt;img src="../imgs/question-mark.svg" id="toggle">
-    &lt;/div>
-    
-    &lt;div class="toggle-menu">
-      &lt;ul id="menu">
-        &lt;table>
-        &lt;tr>
-          &lt;th>&lt;img src="../imgs/task-incompl.svg">Task Incomplete&lt;/th>
-          &lt;th>&lt;img src="../imgs/task-scheduled.svg">Task Scheduled&lt;/th>
-          &lt;th>&lt;img src="../imgs/inspiration.svg">Inspiration&lt;/th>
-        &lt;/tr>
-        &lt;tr>
-          &lt;th>&lt;img src="../imgs/task-compl.svg">Task Complete&lt;/th>
-          &lt;th>&lt;img src="../imgs/event.svg">Event&lt;/th>
-          &lt;th>&lt;img src="../imgs/notes.svg">Notes&lt;/th>
-        &lt;/tr>
-        &lt;tr>
-          &lt;th>&lt;img src="../imgs/task-migrated.svg">Task Migrated&lt;/th>
-          &lt;th>&lt;img src="../imgs/priority.svg">Priority&lt;/th>
-          &lt;th>&lt;img src="../imgs/exploration.svg">Exploration&lt;/th>
-        &lt;/tr>
-        &lt;/table>
-      &lt;/ul>
-    &lt;/div>
-        `;
+    template.innerHTML =
+    `
+      &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.css"/>
+      &lt;link rel="stylesheet" href="./components/calendar/calendar.css">
+        
+        &lt;div id='calendar'>&lt;/div>
+        &lt;div class="container">
 
-    this.showInfo = true;
 
+      `;
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.appendChild(template.content.cloneNode(true));
-
-    const menuButton = this.shadowRoot.querySelector('.q-mark > img');
-    const menuDesc = this.shadowRoot.querySelector('#menu');
-
-    function enlargeButton () {
-      menuButton.style.width = '45px';
-      menuButton.style.height = '45px';
-    }
-
-    function smallerButton () {
-      menuButton.style.width = '35px';
-      menuButton.style.height = '35px';
-    }
-
-    menuButton.addEventListener('click', () => {
-      if (menuDesc.style.display === '') {
-        menuDesc.style.display = 'block';
-        enlargeButton();
-      } else {
-        menuDesc.style.display = '';
-        smallerButton();
-      }
-    });
   }
 }
+document.addEventListener('DOMContentLoaded', function () {
+  const calendarEl = document.querySelector('my-calendar').shadowRoot.querySelector('#calendar');
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+    aspectratio: 1,
+    headerToolbar: {
+      left: 'prev,next',
+      center: 'title',
+      right: 'today'
+    },
+    eventColor: '#126e82',
+    events: [
+      {
+        title: 'Testing',
+        start: '2021-06-03T09:00:00'
+      },
+      {
+        title: 'Calendar',
+        start: '2021-06-03T12:00:00'
+      },
+      {
+        title: 'Fix repo',
+        start: '2021-06-03T15:00:00'
+      },
+      {
+        title: 'Work on project',
+        start: '2021-06-07',
+        end: '2021-06-09',
+        color: '#a3e0e8'
+      },
+      {
+        groupId: 'TM',
+        title: 'Team meeting',
+        start: '2021-06-09T18:00:00'
+      },
+      {
+        groupId: 'TM',
+        title: 'Team meeting',
+        start: '2021-06-16T18:00:00'
+      },
+      {
+        title: 'Cabo Vacation',
+        start: '2021-06-21',
+        end: '2021-06-26',
+        color: '#a3e0e8' // override!
+      },
+      {
+        title: 'Birthday Party',
+        start: '2021-06-13T07:00:00'
+      },
+      {
+        title: 'Friend Wedding',
+        start: '2021-06-26T01:00:00'
+      },
+      {
+        title: 'Zoom meeting',
+        url: 'http://zoom.com/',
+        start: '2021-06-28'
+      }
+    ]
+  });
 
-customElements.define('menu-symbols', MenuSymbols);
+  calendar.render();
+});
+
+window.customElements.define('my-calendar', Calendar);
 </code></pre>
         </article>
     </section>
