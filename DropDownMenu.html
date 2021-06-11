@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: DropDownMenu</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: DropDownMenu</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>DropDownMenu<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>DropDownMenu Web Component</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    
+    <h4 class="name" id="DropDownMenu"><span class="type-signature"></span>new DropDownMenu<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_entry-editor_dropdown-menu_dropdown-menu.js.html">components/entry-editor/dropdown-menu/dropdown-menu.js</a>, <a href="components_entry-editor_dropdown-menu_dropdown-menu.js.html#line2">line 2</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="addSelection"><span class="type-signature"></span>addSelection<span class="signature">(content)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Helper function that generates a single option in the dropdown menu.
+The HTML structure is as follows:</p>
+<pre class="prettyprint source"><code> &lt;div class=&quot;item-container&quot;>
+ &lt;img src=&quot;img filepath&quot; class=&quot;bullet-img&quot;>
+ &lt;span class=&quot;bullet-name&quot;>(content.name)&lt;span>
+ &lt;/div>
+</code></pre>
+<p>This is then appended to the bullet-selection-input div.
+The item-container also has an event listener to update the symbol-display div
+found in the entry-item-creator to that of the selection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>content</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSON</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>{ imgSrc: 'filepath', name: 'what the symbol represents' }</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_entry-editor_dropdown-menu_dropdown-menu.js.html">components/entry-editor/dropdown-menu/dropdown-menu.js</a>, <a href="components_entry-editor_dropdown-menu_dropdown-menu.js.html#line51">line 51</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="initSymbols"><span class="type-signature"></span>initSymbols<span class="signature">(symbols)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Takes in a list of JSON objects with the format { imgSrc: 'filepath', name: 'what the symbol represents' }
+and adds them to the bullet-selection-input div.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>symbols</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSON_Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of all the symbols (bullets) to be added to the dropdown</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_entry-editor_dropdown-menu_dropdown-menu.js.html">components/entry-editor/dropdown-menu/dropdown-menu.js</a>, <a href="components_entry-editor_dropdown-menu_dropdown-menu.js.html#line88">line 88</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Bullet.html">Bullet</a></li><li><a href="Calendar.html">Calendar</a></li><li><a href="Clock.html">Clock</a></li><li><a href="DropDownMenu.html">DropDownMenu</a></li><li><a href="goalsBoard.html">goalsBoard</a></li><li><a href="JournalEntry.html">JournalEntry</a></li><li><a href="MenuSymbols.html">MenuSymbols</a></li><li><a href="MoodIndicator.html">MoodIndicator</a></li><li><a href="navBar.html">navBar</a></li><li><a href="QuoteGenerator.html">QuoteGenerator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createEntry">createEntry</a></li><li><a href="global.html#decodeDateInfo">decodeDateInfo</a></li><li><a href="global.html#decodeDateInfoElement">decodeDateInfoElement</a></li><li><a href="global.html#entryExists">entryExists</a></li><li><a href="global.html#getWeek">getWeek</a></li><li><a href="global.html#saveStorage">saveStorage</a></li><li><a href="global.html#setCurrentDate">setCurrentDate</a></li><li><a href="global.html#updateViewedDate">updateViewedDate</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Jun 11 2021 20:38:57 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

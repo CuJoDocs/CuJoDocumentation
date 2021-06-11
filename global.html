@@ -104,7 +104,7 @@
     
 
     
-    <h4 class="name" id="poooow"><span class="type-signature"></span>poooow<span class="signature">(value, exponent)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    <h4 class="name" id="createEntry"><span class="type-signature"></span>createEntry<span class="signature">(date)</span><span class="type-signature"></span></h4>
     
 
     
@@ -112,7 +112,8 @@
 
 
 <div class="description">
-    Raises a number to exponent
+    <p>Function that creates the specified entry in the storage variable. It creates empty nested
+JSON objects and adds the ISOWeek to the entry.</p>
 </div>
 
 
@@ -148,13 +149,13 @@
 
         <tr>
             
-                <td class="name"><code>value</code></td>
+                <td class="name"><code>date</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">date_string</span>
 
 
             
@@ -164,30 +165,7 @@
 
             
 
-            <td class="description last">The base to raise</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>exponent</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The exponent</td>
+            <td class="description last"><p>date formated as follows {year: year, month: month, day: day}</p></td>
         </tr>
 
     
@@ -228,7 +206,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js-doc-test.js.html">js-doc-test.js</a>, <a href="js-doc-test.js.html#line20">line 20</a>
+        <a href="storage.js.html">storage.js</a>, <a href="storage.js.html#line84">line 84</a>
     </li></ul></dd>
     
 
@@ -253,28 +231,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - The exponent power
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">number</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -286,7 +242,7 @@
     
 
     
-    <h4 class="name" id="sillyLogger"><span class="type-signature"></span>sillyLogger<span class="signature">(message)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="decodeDateInfo"><span class="type-signature"></span>decodeDateInfo<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -294,7 +250,95 @@
 
 
 <div class="description">
-    A silly logger function
+    <p>Method returns an object literal that contains the year, month, and day as strings</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="storage.js.html">storage.js</a>, <a href="storage.js.html#line73">line 73</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="decodeDateInfoElement"><span class="type-signature"></span>decodeDateInfoElement<span class="signature">(element)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Method returns an object literal that contains the year, month, and day as strings</p>
 </div>
 
 
@@ -330,7 +374,566 @@
 
         <tr>
             
-                <td class="name"><code>message</code></td>
+                <td class="name"><code>element</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTML_element</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>element to get the date from</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="storage.js.html">storage.js</a>, <a href="storage.js.html#line61">line 61</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="entryExists"><span class="type-signature"></span>entryExists<span class="signature">(date)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Checks to see if the storage variable has this day stored already or not</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>date</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">date_string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>date formated as follows {year: year, month: month, day: day}</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="storage.js.html">storage.js</a>, <a href="storage.js.html#line146">line 146</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>true/false depending on if the day exists in the storage object (true if it does, false otherwise)</p>
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getWeek"><span class="type-signature"></span>getWeek<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Code adapted from https://www.epochconverter.com/weeknumbers
+Determines what ISO week based on local time.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="storage.js.html">storage.js</a>, <a href="storage.js.html#line23">line 23</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>ISO week based on local time.</p>
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="saveStorage"><span class="type-signature"></span>saveStorage<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Function that saves the storage variable to localStorage</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="storage.js.html">storage.js</a>, <a href="storage.js.html#line38">line 38</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setCurrentDate"><span class="type-signature"></span>setCurrentDate<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Method that sets the given element's date attribute to today's date.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="storage.js.html">storage.js</a>, <a href="storage.js.html#line45">line 45</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="updateViewedDate"><span class="type-signature"></span>updateViewedDate<span class="signature">(dir)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Updates the viewedDate variable to either be forward one day or back one day</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dir</code></td>
             
 
             <td class="type">
@@ -346,7 +949,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>Forward or Backward : Determines whether we are adding a day or going back a day</p></td>
         </tr>
 
     
@@ -387,7 +990,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js-doc-test.js.html">js-doc-test.js</a>, <a href="js-doc-test.js.html#line8">line 8</a>
+        <a href="storage.js.html">storage.js</a>, <a href="storage.js.html#line162">line 162</a>
     </li></ul></dd>
     
 
@@ -412,28 +1015,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    Nothing
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -455,13 +1036,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#poooow">poooow</a></li><li><a href="global.html#sillyLogger">sillyLogger</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Bullet.html">Bullet</a></li><li><a href="Calendar.html">Calendar</a></li><li><a href="Clock.html">Clock</a></li><li><a href="DropDownMenu.html">DropDownMenu</a></li><li><a href="goalsBoard.html">goalsBoard</a></li><li><a href="JournalEntry.html">JournalEntry</a></li><li><a href="MenuSymbols.html">MenuSymbols</a></li><li><a href="MoodIndicator.html">MoodIndicator</a></li><li><a href="navBar.html">navBar</a></li><li><a href="QuoteGenerator.html">QuoteGenerator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createEntry">createEntry</a></li><li><a href="global.html#decodeDateInfo">decodeDateInfo</a></li><li><a href="global.html#decodeDateInfoElement">decodeDateInfoElement</a></li><li><a href="global.html#entryExists">entryExists</a></li><li><a href="global.html#getWeek">getWeek</a></li><li><a href="global.html#saveStorage">saveStorage</a></li><li><a href="global.html#setCurrentDate">setCurrentDate</a></li><li><a href="global.html#updateViewedDate">updateViewedDate</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Jun 11 2021 20:37:40 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Jun 11 2021 20:38:57 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
